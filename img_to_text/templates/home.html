@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to text</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 300px;
+            margin: auto;
+            text-align: center;
+        }
+        .image-input {
+            margin-bottom: 20px;
+        }
+        .response {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Upload an Image</h1>
+        
+        <!-- Image Input -->
+        <input type="file" id="imageInput" class="image-input" accept="image/*">
+
+        <!-- Div to Display Response -->
+        <div id="response" class="response"></div>
+    </div>
+
+    <!-- jQuery for Ajax (You can also use vanilla JS) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // When image input changes
+            $('#imageInput').on('change', function() {
+                var formData = new FormData();
+                var file = $('#imageInput')[0].files[0];
+
+                // Check if a file is selected
+                if (file) {
+                    formData.append('image', file);
+
+                    // Send the image file via AJAX
+                    $.ajax({
+                        url: '', 
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        success: function(response) {
+                            // Update the response div with the returned data
+                            $('#response').html(response.Extracted_text);
+                            console.log(response.Extracted_text)
+                        },
+                        error: function(xhr, status, error) {
+                            $('#response').html('Error: ' + error);
+                        }
+                    });
+                } else {
+                    $('#response').html('Please select an image file.');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-899a6m8)eef0j^rns@hy#j2d+tk^$b_3$4ye^h&m3yql26yd2d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['159b-197-211-59-75.ngrok-free.app', '127.0.0.1']
 
 
 # Application definition
@@ -55,7 +56,8 @@ ROOT_URLCONF = 'medical_ocr.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
