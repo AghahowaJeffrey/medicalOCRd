@@ -1,0 +1,29 @@
+{
+    "builds": [
+      {
+        "src": "hng_stage2/wsgi.py",
+        "use": "@vercel/python",
+        "config": {
+          "maxLambdaSize": "15mb",
+          "runtime": "Python3.12"
+        }
+      },
+      {
+        "src": "build_file.sh",
+        "use": "@vercel/static-build"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "hng_stage2/wsgi.py"
+      }
+    ],
+    "outputDirectory": "dist",
+    "build": {
+      "env": {
+        "PYTHONPATH": "."
+      }
+    }
+}
+
